@@ -466,6 +466,12 @@ class MOLNSController(MOLNSbase):
         else:
             print "No instance running for this controller"
 
+    @classmethod
+    def restart_controller(cls, args, config, password=None):
+        """ Restarts the MOLNs controller. """
+        print "Restarting controller..."
+        cls.stop_controller(args, config)
+        cls.start_controller(args, config, password)
 
     @classmethod
     def terminate_controller(cls, args, config):
@@ -1389,6 +1395,8 @@ COMMAND_LIST = [
             function=MOLNSController.start_controller),
         Command('stop', {'name':None},
             function=MOLNSController.stop_controller),
+        Command('restart', {'name':None},
+            function=MOLNSController.restart_controller),
         Command('terminate', {'name':None},
             function=MOLNSController.terminate_controller),
         Command('put', {'name':None, 'file':None},
